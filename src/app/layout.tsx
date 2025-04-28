@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
+import { GNB } from '@/components/GNB'
 import './globals.css'
+import type { Metadata } from 'next'
+import { Footer } from '@/components/Footer'
+import style from './layout.module.css'
 
 export const metadata: Metadata = {
 	title: '메잘알 - 메이플스토리 전적 검색 서비스',
@@ -13,8 +16,12 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html>
-			<body>{children}</body>
+		<html lang="ko">
+			<body>
+				<GNB />
+				<div className={style.container}>{children}</div>
+				<Footer />
+			</body>
 		</html>
 	)
 }
