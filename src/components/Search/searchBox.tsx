@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import style from './search.module.css'
 
 interface SearchBoxProps {
 	width?: number
@@ -18,16 +17,16 @@ export function SearchBox({
 		fontSize: `${fontsize}px`,
 	}
 	return (
-		<div className={style.container}>
+		<div className="bg-red-500 flex items-center">
 			<input
-				className={style.userInput}
+				className="bg-black text-white px-5 py-2.5 rounded-l-[12px]"
 				style={{ ...propsStyle }}
 				type="text"
 				placeholder="유저 닉네임 검색"
 			/>
 			<Link
 				href={'/'}
-				className={style.searchBtn}
+				className="bg-orange-500 text-white px-5 py-2.5 flex items-center justify-start rounded-r-[12px]"
 				style={{ ...propsStyle, width: '30px' }}
 			>
 				검색

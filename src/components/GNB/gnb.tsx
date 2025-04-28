@@ -1,16 +1,19 @@
 import Link from 'next/link'
-import style from './gnb.module.css'
 
 export function GNB() {
 	return (
-		<div className={style.container}>
-			<div className={style.box}>
+		<div className="bg-black">
+			<div className="px-[150px] flex items-center justify-between h-[40px] text-white text-[20px] border-b-2 border-white">
 				<Link href={'/'}>LOGO</Link>
 				<div></div>
 			</div>
-			<div className={style.box2}>
-				<Link href={'/'}>탭1</Link>
-				<Link href={'/'}>탭2</Link>
+			<div className="px-[150px] flex items-center h-[40px] text-white text-[15px]">
+				<Link href={'/'} className="mr-[20px]">
+					탭1
+				</Link>
+				<Link href={'/'} className="mr-[20px]">
+					탭2
+				</Link>
 				<Link href={'/'}>탭3</Link>
 			</div>
 		</div>
