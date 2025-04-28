@@ -18,7 +18,7 @@ export default function RootLayout({
 		<html lang="ko">
 			<body>
 				<GNB />
-				<div className={'px-[150px]'}>{children}</div>
+				<div className="bg-[#3e3e3e]">{children}</div>
 				<Footer />
 			</body>
 		</html>

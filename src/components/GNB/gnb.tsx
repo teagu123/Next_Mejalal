@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 export function GNB() {
 	return (
-		<div className="bg-black">
-			<div className="px-[150px] flex items-center justify-between h-[40px] text-white text-[20px] border-b-2 border-white">
+		<div className="bg-[#171b1b]">
+			<div className="px-[150px] flex items-center justify-between h-[40px] text-white text-[20px]">
 				<Link href={'/'}>LOGO</Link>
 				<div></div>
 			</div>
