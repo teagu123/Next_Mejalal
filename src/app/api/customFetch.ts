@@ -5,17 +5,17 @@ export async function customFetch<T>(
 	url: string,
 	options: RequestInit = {},
 ): Promise<T> {
-	const res = await fetch(`${BASE_URL}${url}`, {
-		...options,
-		headers: {
-			'Content-Type': 'application/json',
-			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
-		},
-	})
+	try {
+		const res = await fetch(`${BASE_URL}${url}`, {
+			...options,
+			headers: {
+				'Content-Type': 'application/json',
+				'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+			},
+		})
 
-	if (!res.ok) {
-		throw new Error(`API 요청 실패: ${res.status}`)
+		return res.json() as Promise<T>
+	} catch (error) {
+		throw error.message
 	}
-
-	return res.json() as Promise<T>
 }
