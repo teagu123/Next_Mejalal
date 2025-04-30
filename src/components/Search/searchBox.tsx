@@ -57,7 +57,7 @@ export function SearchBox({
 			style={{ ...propsStyle, border: 'none' }}
 		>
 			<input
-				className="bg-[#171b34] text-white px-5 py-2.5 rounded-l-[12px]"
+				className="bg-[#29292a] text-white px-5 py-2.5 rounded-l-[12px]"
 				style={{ ...propsStyle, borderRight: 'none' }}
 				type="text"
 				placeholder="유저 닉네임 검색"
@@ -66,7 +66,7 @@ export function SearchBox({
 				value={inputVal}
 			/>
 			<div
-				className="bg-[#171b34] text-white px-2 py-2.5 flex items-center justify-start rounded-r-[12px] cursor-pointer
+				className="bg-[#29292a] text-white px-2 py-2.5 flex items-center justify-start rounded-r-[12px] cursor-pointer
 				"
 				style={{ ...propsStyle, width: '30px', borderLeft: 'none' }}
 				onClick={() => onSearch()}
