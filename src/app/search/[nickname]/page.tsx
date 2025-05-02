@@ -49,6 +49,8 @@ export default async function SearchUser({
 
 	const { popularity } = getPopularity
 
+	// data fatching 전 컴포넌트 랜더링 issue
+
 	return (
 		<>
 			{popularity && ocid && (
