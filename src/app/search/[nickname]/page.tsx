@@ -92,8 +92,6 @@ export default async function SearchUser({
 
 	const getStat = await getStatApi(ocid)
 
-	console.log(getStat)
-
 	return (
 		<>
 			<div className="w-screen flex flex-col items-center">
