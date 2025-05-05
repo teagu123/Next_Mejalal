@@ -3,7 +3,7 @@ import { SearchBox } from '../Search'
 
 export function GNB() {
 	return (
-		<div className="bg-[#19191a]">
+		<div className="bg-[#29292a]">
 			<div className="ml-50 mr-50 flex items-center justify-between h-[40px] text-[20px] text-white">
 				<Link href={'/'}>LOGO</Link>
 				<div className="mt-3">

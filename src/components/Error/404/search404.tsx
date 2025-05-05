@@ -12,11 +12,12 @@ export function Search404({ nickname }: { nickname: string }) {
 					<SearchBox />
 				</div>
 				<Image
-					src={'/images/error/404.png'}
+					src="/images/error/404.png"
 					alt="오류 배경 이미지"
-					width={400} // 이미지의 원본 너비
-					height={400} // 이미지의 원본 높이
-					className="grayscale-10 mr-8"
+					width={400}
+					height={500}
+					priority
+					className="h-auto grayscale-10 mr-8"
 				/>
 			</div>
 		</div>

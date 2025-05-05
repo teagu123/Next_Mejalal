@@ -1,19 +1,19 @@
-import { customFetch } from '@/app/api/customFetch'
+import { TypeStat } from '@/app/search/[nickname]/page'
+import { HyperStat } from '../HyperStatList'
 
-export async function CharacterStat({ ocid }: { ocid?: string }) {
-	const getStat = await customFetch<any>(`/character/stat?ocid=${ocid}`)
-	console.log(getStat)
-
+export function CharacterStat({
+	getStat,
+	ocid,
+}: {
+	getStat: TypeStat
+	ocid: string
+}) {
 	const getStatVal = (key: string): string => {
 		const index = getStat?.final_stat?.find(
 			(el: { stat_name: string }) => el.stat_name === key,
 		)
 		return index ? index.stat_value : '-'
 	}
-
-	const gethyperStat = await customFetch<any>(
-		`/character/hyper-stat?ocid=${ocid}`,
-	)
 
 	return (
 		<div className="flex justify-end">
@@ -105,8 +105,8 @@ export async function CharacterStat({ ocid }: { ocid?: string }) {
 						</span>
 					</div>
 					<div className="flex justify-between">
-						<span className="font-semibold">버프 지속 시간</span>
-						<span>{getStatVal('버프 지속 시간')}</span>
+						<span className="font-semibold">버프 지속시간</span>
+						<span>{getStatVal('버프 지속시간')}</span>
 					</div>
 					<div className="flex justify-between">
 						<span className="font-semibold">재사용 대기시간 미적용</span>
@@ -154,37 +154,7 @@ export async function CharacterStat({ ocid }: { ocid?: string }) {
 				</div>
 			</div>
 			<div>
-				<div className="bg-[#29292a] text-white rounded-lg p-5 w-70 ml-1">
-					<div className="text-[#f3cb38] text-xs font-bold mb-2 text-left">
-						HYPER STAT
-					</div>
-					<div>
-						{gethyperStat?.hyper_stat_preset_1?.map((el: any) => (
-							<div
-								key={el.stat_type}
-								className="flex justify-between text-xs text-[#d1d5db] font-semibold mb-1"
-							>
-								<span>{el.stat_type}</span>
-								<span>
-									<span className="mr-1">Lv.</span>
-									{el.stat_level}
-								</span>
-							</div>
-						))}
-					</div>
-					<div className="flex items-center justify-around bg-[#5b6474] px-2 py-1 rounded-md text-xs text-white space-x-1 mt-2">
-						<span className="opacity-70 mr-1">PRESETS</span>
-						<button className="w-8 h-5 flex items-center justify-center rounded-full bg-white text-black text-[10px] font-bold">
-							1
-						</button>
-						<button className="w-8 h-5 flex items-center justify-center rounded-full border border-white text-white text-[10px] opacity-80 hover:bg-white hover:text-black">
-							2
-						</button>
-						<button className="w-8 h-5 flex items-center justify-center rounded-full border border-white text-white text-[10px] opacity-80 hover:bg-white hover:text-black">
-							3
-						</button>
-					</div>
-				</div>
+				<HyperStat ocid={ocid} />
 			</div>
 		</div>
 	)

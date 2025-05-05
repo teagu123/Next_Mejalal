@@ -1,4 +1,4 @@
-import { CharInfoType } from '@/app/search/[nickname]/page'
+import { CharInfoType } from '@/app/search/[nickname]/types/searchPage'
 import Image from 'next/image'
 
 export function CharacterCard({
@@ -8,7 +8,6 @@ export function CharacterCard({
 	getCharacterInfo: CharInfoType
 	popularity: number
 }) {
-	console.log(getCharacterInfo)
 	const {
 		character_name,
 		world_name,

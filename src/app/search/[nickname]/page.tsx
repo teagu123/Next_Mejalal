@@ -1,27 +1,76 @@
-import { customFetch } from '@/app/api/customFetch'
 import { CharacterCard } from '@/components/CharacterCard'
 import { CharacterStat } from '@/components/CharacterStatList.tsx'
 import { Search404 } from '@/components/Error'
+import { delay } from '@/hook/useDelay'
 
-export interface CharInfoType {
-	access_flag: boolean
-	character_class: string
-	character_class_level: string
-	character_date_create: string
-	character_exp: number
-	character_exp_rate: string
-	character_gender: '남' | '여'
-	character_guild_name: string
-	character_image: string
-	character_level: number
-	character_name: string
-	date: string | null
-	liberation_quest_clear_flag: boolean
-	world_name: string
-	error: {
-		name: string
-		message: string
-	}
+const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
+
+export interface TypeStat {
+	final_stat: {
+		stat_name: string
+		stat_value: string
+	}[]
+}
+
+//ocid
+const getOcid = async (nickname: string) => {
+	const res = await fetch(
+		`${BASE_URL}/id?character_name=${decodeURIComponent(nickname)}`,
+		{
+			headers: {
+				'Content-Type': 'application/json',
+				'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+			},
+		},
+	)
+
+	if (!res.ok) return res.status
+
+	const { ocid } = await res.json()
+
+	return ocid
+}
+
+//character info
+const getCharInfo = async (ocid: string) => {
+	const res = await fetch(`${BASE_URL}/character/basic?ocid=${ocid}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+		},
+		cache: 'force-cache',
+	})
+
+	return await res.json()
+}
+
+//character getPopularity
+const getPopularity = async (ocid: string) => {
+	const res = await fetch(`${BASE_URL}/character/popularity?ocid=${ocid}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+		},
+		cache: 'force-cache',
+	})
+
+	const { popularity } = await res.json()
+
+	return popularity
+}
+
+//character Stat
+const getStatApi = async (ocid: string) => {
+	const res3 = await fetch(`${BASE_URL}/character/stat?ocid=${ocid}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+		},
+		cache: 'force-cache',
+	})
+
+	return await res3.json()
 }
 
 export default async function SearchUser({
@@ -31,46 +80,38 @@ export default async function SearchUser({
 }) {
 	const { nickname } = await params
 
-	const getOcid = await customFetch<{ ocid: string }>(
-		`/id?character_name=${decodeURIComponent(nickname)}`,
-	)
-	const { ocid } = getOcid
+	const ocid = await getOcid(decodeURIComponent(nickname))
 
-	const getCharacterInfo = await customFetch<CharInfoType>(
-		`/character/basic?ocid=${ocid}`,
-	)
+	if (ocid === 400) return <Search404 nickname={decodeURIComponent(nickname)} />
 
-	if (getCharacterInfo?.error?.name === 'OPENAPI00003')
-		return <Search404 nickname={decodeURIComponent(nickname)} />
+	const getCharacterInfo = await getCharInfo(ocid)
 
-	const getPopularity = await customFetch<{ popularity: number }>(
-		`/character/popularity?ocid=${ocid}`,
-	)
+	const popularity = await getPopularity(ocid)
 
-	const { popularity } = getPopularity
+	await delay(1000)
 
-	// data fatching 전 컴포넌트 랜더링 issue
+	const getStat = await getStatApi(ocid)
+
+	console.log(getStat)
 
 	return (
 		<>
-			{popularity && ocid && (
-				<div className="w-screen flex flex-col items-center">
-					<div className="w-[70vw] mt-30 flex mb-1 justify-center">
-						<div className="p-5 bg-[#29292a] rounded-lg">
-							<div className="text-[#f3cb38] text-xs font-bold mb-2 text-left">
-								CHARACTER INFO
-							</div>
-							<CharacterCard
-								getCharacterInfo={getCharacterInfo}
-								popularity={popularity}
-							/>
+			<div className="w-screen flex flex-col items-center">
+				<div className="w-[70vw] mt-30 flex mb-1 justify-center">
+					<div className="p-5 bg-[#29292a] rounded-lg">
+						<div className="text-[#f3cb38] text-xs font-bold mb-2 text-left">
+							CHARACTER INFO
 						</div>
-					</div>
-					<div className="w-[70vw] mb-10">
-						<CharacterStat ocid={ocid} />
+						<CharacterCard
+							getCharacterInfo={getCharacterInfo}
+							popularity={popularity}
+						/>
 					</div>
 				</div>
-			)}
+				<div className="w-[70vw] mb-10">
+					<CharacterStat getStat={getStat} ocid={ocid} />
+				</div>
+			</div>
 		</>
 	)
 }
