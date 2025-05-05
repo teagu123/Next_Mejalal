@@ -1,5 +1,6 @@
 import { CharInfoType } from '@/app/search/[nickname]/types/searchPage'
 import Image from 'next/image'
+import { CharacterImg } from '.'
 
 export function CharacterCard({
 	getCharacterInfo,
@@ -21,6 +22,8 @@ export function CharacterCard({
 		character_image,
 	} = getCharacterInfo
 
+	console.log(character_image)
+
 	const infoListData = [
 		[0, 'LV.', character_level],
 		[1, '직업', character_class],
@@ -33,12 +36,9 @@ export function CharacterCard({
 	return (
 		<div className="flex rounded-lg bg-[#ede9e9]">
 			<div className="relative h-[100%] flex flex-col items-center justify-center">
-				<Image
-					src={character_image}
-					alt={character_name + '의 캐릭터 이미지'}
-					width={200}
-					height={200}
-					className="absolute z-100"
+				<CharacterImg
+					character_image={character_image}
+					character_name={character_name}
 				/>
 				<Image
 					src={'/images/characterBackGround/background1.png'}
