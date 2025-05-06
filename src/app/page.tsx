@@ -7,8 +7,8 @@ export default function Home() {
 	const backgroundPath = `/images/searchBackGround/search-background1.png`
 
 	return (
-		<div className="w-screen h-screen ">
-			<div className="relative w-full h-[90vh] ">
+		<div className="w-screen h-screen">
+			<div className="relative w-full h-screen ">
 				<Image
 					src={backgroundPath}
 					alt="검색 배경 이미지"

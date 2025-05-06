@@ -1,19 +1,12 @@
-import { CharacterCard } from '@/components/CharacterCard'
-import { CharacterStat } from '@/components/CharacterStatList.tsx'
+import { CharacterInfo } from '@/components/CharacterInfo'
+import { CharacterStat } from '@/components/CharacterStat.tsx'
 import { Search404 } from '@/components/Error'
-import { delay } from '@/hook/useDelay'
+import { useDelay } from '@/hook/useDelay'
 
 const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
-export interface TypeStat {
-	final_stat: {
-		stat_name: string
-		stat_value: string
-	}[]
-}
-
-//ocid
+//캐릭터 식별자(ocid)조회
 const getOcid = async (nickname: string) => {
 	const res = await fetch(
 		`${BASE_URL}/id?character_name=${decodeURIComponent(nickname)}`,
@@ -32,7 +25,7 @@ const getOcid = async (nickname: string) => {
 	return ocid
 }
 
-//character info
+//캐릭터 기본정보 조회
 const getCharInfo = async (ocid: string) => {
 	const res = await fetch(`${BASE_URL}/character/basic?ocid=${ocid}`, {
 		headers: {
@@ -42,10 +35,12 @@ const getCharInfo = async (ocid: string) => {
 		cache: 'force-cache',
 	})
 
+	if (!res.ok) return res.status
+
 	return await res.json()
 }
 
-//character getPopularity
+//캐릭터 인기도 조회
 const getPopularity = async (ocid: string) => {
 	const res = await fetch(`${BASE_URL}/character/popularity?ocid=${ocid}`, {
 		headers: {
@@ -60,7 +55,7 @@ const getPopularity = async (ocid: string) => {
 	return popularity
 }
 
-//character Stat
+//캐릭터 종합능력치 정보 조회
 const getStatApi = async (ocid: string) => {
 	const res3 = await fetch(`${BASE_URL}/character/stat?ocid=${ocid}`, {
 		headers: {
@@ -86,9 +81,12 @@ export default async function SearchUser({
 
 	const getCharacterInfo = await getCharInfo(ocid)
 
+	if (getCharacterInfo === 400)
+		return <Search404 nickname={decodeURIComponent(nickname)} />
+
 	const popularity = await getPopularity(ocid)
 
-	await delay(1000)
+	await useDelay(1000)
 
 	const getStat = await getStatApi(ocid)
 
@@ -100,7 +98,7 @@ export default async function SearchUser({
 						<div className="text-[#f3cb38] text-xs font-bold mb-2 text-left">
 							CHARACTER INFO
 						</div>
-						<CharacterCard
+						<CharacterInfo
 							getCharacterInfo={getCharacterInfo}
 							popularity={popularity}
 						/>

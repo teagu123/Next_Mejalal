@@ -13,10 +13,10 @@ export function GNB() {
 			<div className="ml-50 mr-47 flex items-center justify-between h-[40px] text-white text-[15px]">
 				<div>
 					<Link href={'/'} className="mr-[20px]">
-						탭1
+						캐릭터 검색
 					</Link>
-					<Link href={'/'} className="mr-[20px]">
-						탭2
+					<Link href={'/ranking'} className="mr-[20px]">
+						랭킹
 					</Link>
 					<Link href={'/'}>탭3</Link>
 				</div>
