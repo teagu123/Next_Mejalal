@@ -1,3 +1,4 @@
+import { CashCody } from '@/components/CashCody'
 import { CharacterInfo } from '@/components/CharacterInfo'
 import { CharacterStat } from '@/components/CharacterStat.tsx'
 import { Search404 } from '@/components/Error'
@@ -57,7 +58,7 @@ const getPopularity = async (ocid: string) => {
 
 //캐릭터 종합능력치 정보 조회
 const getStatApi = async (ocid: string) => {
-	const res3 = await fetch(`${BASE_URL}/character/stat?ocid=${ocid}`, {
+	const res = await fetch(`${BASE_URL}/character/stat?ocid=${ocid}`, {
 		headers: {
 			'Content-Type': 'application/json',
 			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
@@ -65,7 +66,23 @@ const getStatApi = async (ocid: string) => {
 		cache: 'force-cache',
 	})
 
-	return await res3.json()
+	return await res.json()
+}
+
+//캐릭터 캐시 아이템 조회
+const getCashCody = async (ocid: string) => {
+	const res = await fetch(
+		`${BASE_URL}/character/cashitem-equipment?ocid=${ocid}`,
+		{
+			headers: {
+				'Content-Type': 'application/json',
+				'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+			},
+			cache: 'force-cache',
+		},
+	)
+
+	return await res.json()
 }
 
 export default async function SearchUser({
@@ -90,22 +107,30 @@ export default async function SearchUser({
 
 	const getStat = await getStatApi(ocid)
 
+	const cashCody = await getCashCody(ocid)
+
+	console.log(cashCody)
+
 	return (
 		<>
 			<div className="w-screen flex flex-col items-center">
-				<div className="w-[70vw] mt-30 flex mb-1 justify-center">
-					<div className="p-5 bg-[#29292a] rounded-lg">
-						<div className="text-[#f3cb38] text-xs font-bold mb-2 text-left">
-							CHARACTER INFO
+				<div className="w-[70vw] mt-30 flex justify-start">
+					<CashCody />
+					<div className="flex flex-col items-start">
+						<div className="p-5 bg-[#29292a] rounded-lg mb-1">
+							<div className="text-[#f3cb38] text-xs font-bold mb-2 text-left">
+								CHARACTER INFO
+							</div>
+							<CharacterInfo
+								getCharacterInfo={getCharacterInfo}
+								popularity={popularity}
+							/>
 						</div>
-						<CharacterInfo
-							getCharacterInfo={getCharacterInfo}
-							popularity={popularity}
-						/>
+
+						<div className="w-[70vw] mb-10 flex ">
+							<CharacterStat getStat={getStat} ocid={ocid} />
+						</div>
 					</div>
-				</div>
-				<div className="w-[70vw] mb-10">
-					<CharacterStat getStat={getStat} ocid={ocid} />
 				</div>
 			</div>
 		</>
