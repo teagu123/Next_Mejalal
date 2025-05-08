@@ -109,13 +109,11 @@ export default async function SearchUser({
 
 	const cashCody = await getCashCody(ocid)
 
-	const { cash_item_equipment_base } = cashCody
-
 	return (
 		<>
 			<div className="w-screen flex flex-col items-center">
 				<div className="w-[70vw] mt-30 flex justify-start">
-					<CashCody cashData={cash_item_equipment_base} />
+					<CashCody cashData={cashCody} />
 					<div className="flex flex-col items-start">
 						<div className="p-5 bg-[#29292a] rounded-lg mb-1">
 							<div className="text-[#f3cb38] text-xs font-bold mb-2 text-left">
