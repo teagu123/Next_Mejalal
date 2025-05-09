@@ -3,6 +3,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { KeyboardEvent, useEffect, useState } from 'react'
 
 interface SearchBoxProps {
+	type?: 'search' | 'guild'
 	width?: number
 	height?: number
 	fontsize?: number
@@ -10,6 +11,7 @@ interface SearchBoxProps {
 }
 
 export function SearchBox({
+	type = 'search',
 	width = 400,
 	height = 50,
 	fontsize = 14,
@@ -35,7 +37,7 @@ export function SearchBox({
 			if (paths !== '') return router.push(`/`)
 		}
 
-		router.push(`/search/${inputVal}`)
+		router.push(`/${type}/${inputVal}`)
 	}
 	const activeEnter = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
@@ -60,7 +62,7 @@ export function SearchBox({
 				className="bg-[#29292a] text-white px-5 py-2.5 rounded-l-[12px]"
 				style={{ ...propsStyle, borderRight: 'none' }}
 				type="text"
-				placeholder="유저 닉네임 검색"
+				placeholder={type === 'search' ? '유저 닉네임 검색' : '길드명 검색'}
 				onChange={e => setInputVal(e.target.value)}
 				onKeyDown={e => activeEnter(e)}
 				value={inputVal}

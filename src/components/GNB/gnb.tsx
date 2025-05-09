@@ -18,7 +18,7 @@ export function GNB() {
 					<Link href={'/ranking'} className="mr-[20px]">
 						랭킹
 					</Link>
-					<Link href={'/'}>탭3</Link>
+					<Link href={'/guild'}>길드</Link>
 				</div>
 				<div>
 					<Link
