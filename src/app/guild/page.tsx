@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { RankListBox } from '../ranking/components/rankListBox'
 import { GuildList } from '@/components/GuildList'
-import { SearchBox } from '@/components/Search'
+import { GuildSearchBox, SearchBox } from '@/components/Search'
 
 const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
@@ -32,7 +32,7 @@ export default function Guild() {
 		<div className="w-screen flex justify-center">
 			<div className="w-[70vw] mt-20 flex  flex-col mb-1 items-center z-100 ">
 				<h1 className="text-center mb-10 text-5xl text-white">길드 랭킹</h1>
-				<SearchBox type="guild" />
+				<GuildSearchBox />
 				<div className="w-full mt-10 ">
 					{getGuildRank('길드 랭킹', '2025-05-04')}
 				</div>
