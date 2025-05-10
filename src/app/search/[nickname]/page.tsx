@@ -8,7 +8,7 @@ const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
 //캐릭터 식별자(ocid)조회
-const getOcid = async (nickname: string) => {
+export const getOcid = async (nickname: string) => {
 	const res = await fetch(
 		`${BASE_URL}/id?character_name=${decodeURIComponent(nickname)}`,
 		{
@@ -27,7 +27,7 @@ const getOcid = async (nickname: string) => {
 }
 
 //캐릭터 기본정보 조회
-const getCharInfo = async (ocid: string) => {
+export const getCharInfo = async (ocid: string) => {
 	const res = await fetch(`${BASE_URL}/character/basic?ocid=${ocid}`, {
 		headers: {
 			'Content-Type': 'application/json',

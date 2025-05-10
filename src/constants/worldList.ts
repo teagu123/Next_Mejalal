@@ -1,0 +1,21 @@
+export const worldList: { worldName: string; worldIcon: string }[] = [
+	{ worldName: '스카니아', worldIcon: 'Icon' },
+	{ worldName: '베라', worldIcon: 'Icon' },
+	{ worldName: '루나', worldIcon: 'Icon' },
+	{ worldName: '제니스', worldIcon: 'Icon' },
+	{ worldName: '크로아', worldIcon: 'Icon' },
+	{ worldName: '유니온', worldIcon: 'Icon' },
+	{ worldName: '엘리시움', worldIcon: 'Icon' },
+	{ worldName: '이노시스', worldIcon: 'Icon' },
+	{ worldName: '레드', worldIcon: 'Icon' },
+
+	{ worldName: '오로라', worldIcon: 'Icon' },
+	{ worldName: '아케인', worldIcon: 'Icon' },
+	{ worldName: '노바', worldIcon: 'Icon' },
+	{ worldName: '에오스', worldIcon: 'Icon' },
+	{ worldName: '헬리오스', worldIcon: 'Icon' },
+	{ worldName: '챌린저스', worldIcon: 'Icon' },
+	{ worldName: '챌린저스2', worldIcon: 'Icon' },
+	{ worldName: '챌린저스3', worldIcon: 'Icon' },
+	{ worldName: '챌린저스4', worldIcon: 'Icon' },
+]
