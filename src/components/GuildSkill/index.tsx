@@ -1,0 +1,1 @@
+export { GuildSkill } from './guildskill'

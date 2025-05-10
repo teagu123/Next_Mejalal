@@ -1,3 +1,4 @@
+import { GuildRankingInfo } from '@/types/RankingPage'
 import Link from 'next/link'
 
 export function GuildList({
@@ -5,14 +6,14 @@ export function GuildList({
 	listData,
 }: {
 	title: string
-	listData: any
+	listData: GuildRankingInfo[]
 }) {
 	const sliceData = listData.slice(0, 100)
 
 	return (
 		<div className="w-full bg-[#2d2c2cab] p-2 rounded-sm text-white mb-10">
 			<div className="border-b border-b-[#eae7e726] pb-1 mb-1">{title}</div>
-			{sliceData.map((el: any) => (
+			{sliceData.map((el: GuildRankingInfo) => (
 				<Link
 					href={`/guild/${el.guild_name}/${el.world_name}`}
 					key={el.ranking}

@@ -1,3 +1,4 @@
+import { UnionRankingTotal } from '@/types/RankingPage'
 import Link from 'next/link'
 
 export function RankListBox({
@@ -5,7 +6,7 @@ export function RankListBox({
 	listData,
 }: {
 	title: string
-	listData: any
+	listData: UnionRankingTotal[]
 }) {
 	return (
 		<div className="w-full bg-[#2d2c2cab] p-2 rounded-sm text-white">

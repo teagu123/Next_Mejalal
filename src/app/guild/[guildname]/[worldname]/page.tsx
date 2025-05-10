@@ -1,43 +1,10 @@
-import { getCharInfo, getOcid } from '@/app/search/[nickname]/page'
+import { getCharInfo, getGuildInfo, getGuildOcid, getOcid } from '@/app/api'
+
+import { GuildSkill } from '@/components/GuildSkill'
+import { GuildInfo } from '@/types/GuildPage'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
-
-//길드 ocid 조회
-const getGuildOcid = async (guild_name: string, world_name: string) => {
-	const res = await fetch(
-		`${BASE_URL}/guild/id?guild_name=${guild_name}&world_name=${world_name}`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
-			},
-		},
-	)
-
-	if (!res.ok) return res.status
-
-	const { oguild_id } = await res.json()
-
-	return oguild_id
-}
-
-//길드 정보 조회
-const getGuildInfo = async (guildOcid: string) => {
-	const res = await fetch(`${BASE_URL}/guild/basic?oguild_id=${guildOcid}`, {
-		headers: {
-			'Content-Type': 'application/json',
-			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
-		},
-		cache: 'force-cache',
-	})
-
-	if (!res.ok) return res.status
-
-	return await res.json()
-}
 export default async function GuildSearch({
 	params,
 }: {
@@ -47,7 +14,7 @@ export default async function GuildSearch({
 
 	const guildOcid = await getGuildOcid(guildname, worldname)
 
-	const guildInfo = await getGuildInfo(guildOcid)
+	const guildInfo: GuildInfo = await getGuildInfo(guildOcid)
 
 	const {
 		guild_name,
@@ -58,6 +25,7 @@ export default async function GuildSearch({
 		world_name,
 		guild_member,
 		guild_member_count,
+		guild_skill,
 	} = guildInfo
 
 	const ocid = await getOcid(guild_master_name)
@@ -66,8 +34,6 @@ export default async function GuildSearch({
 
 	const { character_image, character_name, character_class, character_level } =
 		masterInfo
-
-	console.log(guildInfo, masterInfo)
 
 	const backgroundPath = `/images/guild/guildBack3.png`
 
@@ -159,6 +125,12 @@ export default async function GuildSearch({
 						길드 스킬
 					</div>
 				</div>
+
+				{guild_skill.length === 0 ? (
+					<div className="text-white p-2">길드 스킬이 없습니다.</div>
+				) : (
+					<GuildSkill guild_skill={guild_skill} />
+				)}
 			</div>
 		</div>
 	)

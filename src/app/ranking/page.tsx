@@ -1,5 +1,10 @@
+import { RankListBox } from '@/components/rankListBox'
+import {
+	DojangRankingInfo,
+	GuildRankingInfo,
+	UnionRankingInfo,
+} from '@/types/RankingPage'
 import Image from 'next/image'
-import { RankListBox } from './components/rankListBox'
 
 const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
@@ -34,7 +39,7 @@ const getUnionRank = async (title: string, date: string) => {
 	if (!res.ok) return res.status
 
 	const list = await res.json()
-	const listData = list['ranking'].slice(0, 10)
+	const listData: UnionRankingInfo[] = list['ranking'].slice(0, 10)
 
 	return <RankListBox title={title} listData={listData} />
 }
@@ -54,7 +59,7 @@ const getGuildRank = async (title: string, date: string) => {
 	if (!res.ok) return res.status
 
 	const list = await res.json()
-	const listData = list['ranking'].slice(0, 10)
+	const listData: GuildRankingInfo[] = list['ranking'].slice(0, 10)
 
 	return <RankListBox title={title} listData={listData} />
 }
@@ -75,7 +80,7 @@ const getDojangRank = async (title: string, date: string) => {
 	if (!res.ok) return res.status
 
 	const list = await res.json()
-	const listData = list['ranking'].slice(0, 10)
+	const listData: DojangRankingInfo[] = list['ranking'].slice(0, 10)
 
 	return <RankListBox title={title} listData={listData} />
 }

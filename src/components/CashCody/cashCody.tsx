@@ -1,15 +1,10 @@
 'use client'
 
+import { CashItem, CharacterLook, SelectType } from '@/types/CashCody'
 import Image from 'next/image'
 import { useState } from 'react'
 
-type SelectType =
-	| { key: 'cash_item_equipment_base'; selectNum: '기본' }
-	| { key: 'cash_item_equipment_preset_1'; selectNum: '1' }
-	| { key: 'cash_item_equipment_preset_2'; selectNum: '2' }
-	| { key: 'cash_item_equipment_preset_3'; selectNum: '3' }
-
-export function CashCody({ cashData }: { cashData: any }) {
+export function CashCody({ cashData }: { cashData: CharacterLook }) {
 	const [selectData, setSelectData] = useState<SelectType>({
 		key: 'cash_item_equipment_base',
 		selectNum: '기본',
@@ -42,7 +37,7 @@ export function CashCody({ cashData }: { cashData: any }) {
 		const keyVal = selectData['key']
 
 		const findItem = cashData[keyVal].find(
-			(el: any) => el.cash_item_equipment_slot === korItem,
+			(el: CashItem) => el.cash_item_equipment_slot === korItem,
 		)
 		return findItem ? (
 			<Image
