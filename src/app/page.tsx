@@ -1,28 +1,35 @@
 import { SearchBox } from '@/components/Search'
 import Image from 'next/image'
+import { getTotalRank } from './api'
 
 export default function Home() {
-	// const randomInd = Math.floor(Math.random() * 5) + 1
-
-	const backgroundPath = `/images/searchBackGround/search-background1.png`
+	const backgroundPath = '/images/searchBackGround/search-background.png'
 
 	return (
-		<div className="w-screen h-screen">
-			<div className="relative w-full h-screen ">
+		<div className="relative w-full h-screen overflow-hidden">
+			{/* 배경 이미지 */}
+			<div className="relative w-full h-[400px]">
 				<Image
 					src={backgroundPath}
 					alt="검색 배경 이미지"
 					fill
-					style={{ objectFit: 'cover' }}
-					className="grayscale-10"
-					priority
+					className="object-cover z-0 opacity-90"
 				/>
-				<div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-					<h1 className="text-center mb-10 text-5xl text-white">
-						메 잘 알
-						<span className="text-white text-xl"> 을 통해 알아보는 메이플</span>
-					</h1>
-					<SearchBox />
+			</div>
+			{/* 콘텐츠 영역 */}
+			<div className="absolute top-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+				<h1 className="text-center mb-10 text-5xl text-[#ffffff]">
+					메 잘 알
+					<span className="text-[#ffffff] text-xl">
+						을 통해 알아보는 메이플
+					</span>
+				</h1>
+				<SearchBox />
+			</div>
+
+			<div className="w-screen flex flex-col items-center">
+				<div className="w-[70vw] mt-30 grid grid-cols-3 gap-10">
+					{getTotalRank('종합 랭킹', '2025-05-04')}
 				</div>
 			</div>
 		</div>

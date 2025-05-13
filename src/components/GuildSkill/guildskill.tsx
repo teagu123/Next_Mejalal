@@ -13,7 +13,7 @@ export function GuildSkill({ guild_skill }: { guild_skill: GuildSkillInfo[] }) {
 	]
 
 	return (
-		<div className="p-4 bg-[#b0acac30] text-white">
+		<div className="p-4 bg-[#b0acac30] text-white mb-30">
 			<div className="grid grid-cols-6 gap-4 mb-4 text-center text-sm font-bold">
 				{skillLevel.map(el => (
 					<div key={el}>{el}</div>
