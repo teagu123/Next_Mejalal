@@ -16,7 +16,7 @@ export const getTotalRank = async (title: string, date: string) => {
 	if (!res.ok) return res.status
 
 	const list = await res.json()
-	const listData = list['ranking'].slice(0, 10)
+	const listData = list['ranking']?.slice(0, 10)
 
 	return <RankListBox title={title} listData={listData} />
 }

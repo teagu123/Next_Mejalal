@@ -36,7 +36,7 @@ export function CashCody({ cashData }: { cashData: CharacterLook }) {
 	const findCashItem = (engItem: string, korItem: string) => {
 		const keyVal = selectData['key']
 
-		const findItem = cashData[keyVal].find(
+		const findItem = cashData[keyVal]?.find(
 			(el: CashItem) => el.cash_item_equipment_slot === korItem,
 		)
 		return findItem ? (
