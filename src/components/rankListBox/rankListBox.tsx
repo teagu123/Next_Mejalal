@@ -4,12 +4,19 @@ import Link from 'next/link'
 export function RankListBox({
 	title,
 	listData,
+	darkMode = false,
 }: {
 	title: string
 	listData: UnionRankingTotal[]
+	darkMode: boolean
 }) {
+	//bg-[#2d2c2cab]
 	return (
-		<div className="w-full bg-[#2d2c2cab] p-2 rounded-sm text-white">
+		<div
+			className={`w-full bg-[#1b1a1a] p-2 rounded-sm text-white ${
+				darkMode ? 'bg-[#1b1a1a]' : 'bg-[#2d2c2cab]'
+			}`}
+		>
 			<div className="border-b border-b-[#eae7e726] pb-1 mb-1">{title}</div>
 			{listData.map((el: any) => (
 				<div

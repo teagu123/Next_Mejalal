@@ -4,7 +4,12 @@ import { RankListBox } from '@/components/rankListBox'
 const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
-export const getTotalRank = async (title: string, date: string) => {
+export const getTotalRank = async (
+	title: string,
+	date: string,
+	sliceNum: number = 10,
+	darkMode: boolean = false,
+) => {
 	const res = await fetch(`${BASE_URL}/ranking/overall?date=${date}`, {
 		headers: {
 			'Content-Type': 'application/json',
@@ -16,7 +21,7 @@ export const getTotalRank = async (title: string, date: string) => {
 	if (!res.ok) return res.status
 
 	const list = await res.json()
-	const listData = list['ranking']?.slice(0, 10)
+	const listData = list['ranking']?.slice(0, sliceNum)
 
-	return <RankListBox title={title} listData={listData} />
+	return <RankListBox title={title} listData={listData} darkMode={darkMode} />
 }
