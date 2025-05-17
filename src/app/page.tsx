@@ -1,12 +1,20 @@
 import { SearchBox } from '@/components/Search'
 import Image from 'next/image'
-import { getTotalRank } from './api'
+import { getGuildRank, getNotice, getTotalRank, getUpdateNotice } from './api'
+import { NoticeBox } from '@/components/noticeBox'
 
-export default function Home() {
+export default async function Home() {
 	const backgroundPath = '/images/searchBackGround/search-background.png'
 
+	const [totalRank, guildRank, noticeList, updateList] = await Promise.all([
+		getTotalRank('종합 랭킹', '2025-05-04', 5, true),
+		getGuildRank('길드 랭킹', '2025-05-04', 5, true),
+		getNotice(),
+		getUpdateNotice(),
+	])
+
 	return (
-		<div className="relative w-full h-screen overflow-hidden">
+		<div className="relative w-full h-screen overflow-hidden ">
 			{/* 배경 이미지 */}
 			<div className="relative w-full h-[400px]">
 				<Image
@@ -29,7 +37,10 @@ export default function Home() {
 
 			<div className="w-screen flex flex-col items-center">
 				<div className="w-[70vw] mt-30 grid grid-cols-3 gap-10">
-					{getTotalRank('종합 랭킹', '2025-05-04')}
+					<NoticeBox title="메이플스토리 공지사항" list={noticeList} />
+					{totalRank}
+					{guildRank}
+					<NoticeBox title="메이플스토리 업데이트" list={updateList} />
 				</div>
 			</div>
 		</div>

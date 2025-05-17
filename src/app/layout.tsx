@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ko">
-			<body>
+			<body className="bg-[#3e3e3e]">
 				<GNB />
-				<div className="bg-[#3e3e3e] min-h-[90vh]">{children}</div>
+				<div className="min-h-[90vh]">{children}</div>
 				<Footer />
 			</body>
 		</html>
