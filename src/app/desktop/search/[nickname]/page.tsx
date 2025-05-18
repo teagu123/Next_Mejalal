@@ -9,15 +9,13 @@ import { CashCody } from '@/components/CashCody'
 import { CharacterInfo } from '@/components/CharacterInfo'
 import { CharacterStat } from '@/components/CharacterStat.tsx'
 import { Search404 } from '@/components/Error'
-import { useDelay } from '@/hook/useDelay'
+import { Delay } from '@/hook/useDelay'
 import { Suspense } from 'react'
 
-export default async function SearchUser({
-	params,
-}: {
-	params: { nickname: string }
-}) {
-	const { nickname } = await params
+export default async function SearchUser({ params }: { params: any }) {
+	const { device, nickname } = params
+
+	console.log(decodeURIComponent(nickname))
 
 	const ocid = await getOcid(decodeURIComponent(nickname))
 
@@ -28,7 +26,7 @@ export default async function SearchUser({
 	if (getCharacterInfo === 400)
 		return <Search404 nickname={decodeURIComponent(nickname)} />
 
-	await useDelay(1000)
+	await Delay(1000)
 
 	const [popularity, getStat, cashCody] = await Promise.all([
 		getPopularity(ocid),

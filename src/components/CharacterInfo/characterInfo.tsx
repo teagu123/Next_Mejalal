@@ -14,10 +14,7 @@ export function CharacterInfo({
 		world_name,
 		character_gender,
 		character_class,
-		character_class_level,
 		character_level,
-		character_exp,
-		character_exp_rate,
 		character_guild_name,
 		character_image,
 	} = getCharacterInfo

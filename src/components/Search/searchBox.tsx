@@ -46,7 +46,7 @@ export function SearchBox({
 	useEffect(() => {
 		const paths = pathname.split('/')
 
-		const nickname = paths[2] ? decodeURIComponent(paths[2]) : ''
+		const nickname = paths[3] ? decodeURIComponent(paths[3]) : ''
 
 		setInputVal(nickname)
 	}, [pathname])

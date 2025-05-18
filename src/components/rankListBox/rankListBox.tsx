@@ -8,7 +8,7 @@ export function RankListBox({
 }: {
 	title: string
 	listData: UnionRankingTotal[]
-	darkMode: boolean
+	darkMode?: boolean
 }) {
 	//bg-[#2d2c2cab]
 	return (

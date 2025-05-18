@@ -11,7 +11,7 @@ const getHyperStatApi = async (ocid: string) => {
 	const res = await fetch(`${BASE_URL}/character/hyper-stat?ocid=${ocid}`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+			'x-nxopen-api-key': HEADER_KEY ?? '',
 		},
 		cache: 'force-cache',
 	})

@@ -8,7 +8,7 @@ export const getCashCody = async (ocid: string) => {
 		{
 			headers: {
 				'Content-Type': 'application/json',
-				'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+				'x-nxopen-api-key': HEADER_KEY ?? '',
 			},
 			cache: 'force-cache',
 		},

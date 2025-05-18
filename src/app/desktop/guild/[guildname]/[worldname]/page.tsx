@@ -5,12 +5,8 @@ import { GuildInfo } from '@/types/GuildPage'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default async function GuildSearch({
-	params,
-}: {
-	params: { guildname: string; worldname: string }
-}) {
-	const { guildname, worldname } = await params
+export default async function GuildSearch({ params }: { params: any }) {
+	const { guildname, worldname } = params
 
 	const guildOcid = await getGuildOcid(guildname, worldname)
 

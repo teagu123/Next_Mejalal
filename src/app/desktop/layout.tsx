@@ -1,4 +1,7 @@
+import { GNB } from '@/components/GNB'
+import '../globals.css'
 import type { Metadata } from 'next'
+import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
 	title: '메잘알 - 메이플스토리 전적 검색 서비스',
@@ -8,12 +11,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
 	children,
-}: {
+}: Readonly<{
 	children: React.ReactNode
-}) {
+}>) {
 	return (
-		<html lang="ko">
-			<body className="bg-[#3e3e3e]">{children}</body>
-		</html>
+		<>
+			<GNB />
+			<div className="min-h-[90vh]">{children}</div>
+			<Footer />
+		</>
 	)
 }

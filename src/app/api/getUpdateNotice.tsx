@@ -6,7 +6,7 @@ export const getUpdateNotice = async () => {
 	const res = await fetch(`${BASE_URL}/notice-update`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+			'x-nxopen-api-key': HEADER_KEY ?? '',
 		},
 		cache: 'force-cache',
 	})

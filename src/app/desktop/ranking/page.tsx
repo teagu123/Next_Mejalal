@@ -1,5 +1,10 @@
+import {
+	getDojangRank,
+	getGuildRank,
+	getTotalRank,
+	getUnionRank,
+} from '@/app/api'
 import Image from 'next/image'
-import { getDojangRank, getGuildRank, getTotalRank, getUnionRank } from '../api'
 
 export default async function RankingPage() {
 	const backgroundPath = `/images/ranking/rankingback.png`

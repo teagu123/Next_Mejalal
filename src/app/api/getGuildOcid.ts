@@ -7,7 +7,7 @@ export const getGuildOcid = async (guild_name: string, world_name: string) => {
 		{
 			headers: {
 				'Content-Type': 'application/json',
-				'x-nxopen-api-key': `${HEADER_KEY}` ?? '',
+				'x-nxopen-api-key': HEADER_KEY ?? '',
 			},
 		},
 	)
