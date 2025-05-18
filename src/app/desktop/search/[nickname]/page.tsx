@@ -15,8 +15,6 @@ import { Suspense } from 'react'
 export default async function SearchUser({ params }: { params: any }) {
 	const { device, nickname } = params
 
-	console.log(decodeURIComponent(nickname))
-
 	const ocid = await getOcid(decodeURIComponent(nickname))
 
 	if (ocid === 400) return <Search404 nickname={decodeURIComponent(nickname)} />

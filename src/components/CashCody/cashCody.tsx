@@ -3,6 +3,7 @@
 import { CashItem, CharacterLook, SelectType } from '@/types/CashCody'
 import Image from 'next/image'
 import { useState } from 'react'
+import { CashCodyHover } from '../ItemBoxHover'
 
 export function CashCody({ cashData }: { cashData: CharacterLook }) {
 	const [selectData, setSelectData] = useState<SelectType>({
@@ -33,18 +34,20 @@ export function CashCody({ cashData }: { cashData: CharacterLook }) {
 			})
 	}
 
-	const findCashItem = (engItem: string, korItem: string) => {
-		const keyVal = selectData['key']
-
-		const findItem = cashData[keyVal]?.find(
+	const findItem = (korItem: string) =>
+		cashData[selectData['key']]?.find(
 			(el: CashItem) => el.cash_item_equipment_slot === korItem,
 		)
-		return findItem ? (
+
+	const findCashItem = (engItem: string, korItem: string) => {
+		const findItems = findItem(korItem)
+
+		return findItems ? (
 			<Image
-				src={findItem.cash_item_icon}
+				src={findItems.cash_item_icon}
+				alt={findItems.cash_item_name}
 				width={35}
 				height={35}
-				alt="캐시 아이템 사진"
 			/>
 		) : (
 			engItem
@@ -52,7 +55,7 @@ export function CashCody({ cashData }: { cashData: CharacterLook }) {
 	}
 
 	const commonStyle =
-		'aspect-square rounded border border-gray-400 bg-[conic-gradient(at_top_left,_#d3d3d3,_#a9a9a9)] shadow-inner text-[8px] text-gray-200 flex items-center justify-center text-center'
+		'aspect-square rounded border border-gray-400 bg-[conic-gradient(at_top_left,_#d3d3d3,_#a9a9a9)] shadow-inner text-[8px] text-gray-200 flex items-center justify-center text-center relative group cursor-pointer'
 	return (
 		<div className="p-4 bg-[#e0e0e4] max-w-sm mx-auto rounded-lg shadow-lg w-100 mr-1 h-97">
 			<h2 className="text-[#070707] text-xs font-bold mb-2 text-left w-60">
@@ -76,41 +79,86 @@ export function CashCody({ cashData }: { cashData: CharacterLook }) {
 			</div>
 			<div className="grid grid-cols-5 gap-1">
 				{/* 첫 번째 줄 */}
-				<div className={commonStyle}>{findCashItem('RING', '반지1')}</div>
+				{
+					<div className={commonStyle}>
+						{findCashItem('RING', '반지1')}
+						<CashCodyHover item={findItem('반지1')} />
+					</div>
+				}
 				<div className="col-span-1 row-span-1 " />
-				<div className={commonStyle}>{findCashItem('HAT', '모자')}</div>
+				<div className={commonStyle}>
+					{findCashItem('HAT', '모자')}
+					<CashCodyHover item={findItem('모자')} />
+				</div>
 				<div className="col-span-2 row-span-2 " />
 
 				{/* 두 번째 줄 */}
-				<div className={commonStyle}>{findCashItem('RING', '반지2')}</div>
-				<div className={commonStyle}>{findCashItem('FACE', '얼굴장식')}</div>
+				<div className={commonStyle}>
+					{findCashItem('RING', '반지2')}
+					<CashCodyHover item={findItem('반지2')} />
+				</div>
+				<div className={commonStyle}>
+					{findCashItem('FACE', '얼굴장식')}
+					<CashCodyHover item={findItem('얼굴장식')} />
+				</div>
 				<div className="col-span-1 row-span-1 " />
 
 				{/* 세 번째 줄 */}
-				<div className={commonStyle}>{findCashItem('RING', '반지3')}</div>
-				<div className={commonStyle}>{findCashItem('FACE', '눈장식')}</div>
+				<div className={commonStyle}>
+					{findCashItem('RING', '반지3')}
+					<CashCodyHover item={findItem('반지3')} />
+				</div>
+				<div className={commonStyle}>
+					{findCashItem('FACE', '눈장식')}
+					<CashCodyHover item={findItem('눈장식')} />
+				</div>
 				<div className="col-span-1 row-span-1 " />
-				<div className={commonStyle}>{findCashItem('EAR ACC', '귀고리')}</div>
+				<div className={commonStyle}>
+					{findCashItem('EAR ACC', '귀고리')}
+					<CashCodyHover item={findItem('귀고리')} />
+				</div>
 				<div className="col-span-1 row-span-1 " />
 
 				{/* 네 번째 줄 */}
-				<div className={commonStyle}>{findCashItem('RING', '반지4')}</div>
-				<div className={commonStyle}>{findCashItem('WEAPON', '무기')}</div>
-				<div className={commonStyle}>{findCashItem('TOP', '상의')}</div>
+				<div className={commonStyle}>
+					{findCashItem('RING', '반지4')}
+					<CashCodyHover item={findItem('반지4')} />
+				</div>
+				<div className={commonStyle}>
+					{findCashItem('WEAPON', '무기')}
+					<CashCodyHover item={findItem('무기')} />
+				</div>
+				<div className={commonStyle}>
+					{findCashItem('TOP', '상의')}
+					<CashCodyHover item={findItem('상의')} />
+				</div>
 				<div className="col-span-1 row-span-1 " />
 				<div className={commonStyle}>
 					{findCashItem('SUB WEAPON', '보조무기')}
+					<CashCodyHover item={findItem('보조무기')} />
 				</div>
 
 				{/* 다섯 번째 줄 */}
 				<div className="col-span-2 row-span-1" />
-				<div className={commonStyle}>{findCashItem('PANTS', '하의')}</div>
-				<div className={commonStyle}>{findCashItem('GLOVES', '장갑')}</div>
-				<div className={commonStyle}>{findCashItem('CAPE', '망토')}</div>
+				<div className={commonStyle}>
+					{findCashItem('PANTS', '하의')}
+					<CashCodyHover item={findItem('하의')} />
+				</div>
+				<div className={commonStyle}>
+					{findCashItem('GLOVES', '장갑')}
+					<CashCodyHover item={findItem('장갑')} />
+				</div>
+				<div className={commonStyle}>
+					{findCashItem('CAPE', '망토')}
+					<CashCodyHover item={findItem('망토')} />
+				</div>
 
 				{/* 여섯 번째 줄 */}
 				<div className="col-span-2 row-span-1" />
-				<div className={commonStyle}>{findCashItem('SHOES', '신발')}</div>
+				<div className={commonStyle}>
+					{findCashItem('SHOES', '신발')}
+					<CashCodyHover item={findItem('신발')} />
+				</div>
 			</div>
 		</div>
 	)
