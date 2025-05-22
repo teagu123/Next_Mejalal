@@ -4,16 +4,19 @@ import {
 	getTotalRank,
 	getUnionRank,
 } from '@/app/api'
+import { useToday } from '@/hook/useToday'
 import Image from 'next/image'
 
 export default async function RankingPage() {
 	const backgroundPath = `/images/ranking/rankingback.png`
 
+	const today = useToday()
+
 	const [totalRank, unionRank, guildRank, dojangRank] = await Promise.all([
-		getTotalRank('종합 랭킹', '2025-05-04'),
-		getUnionRank('유니온 랭킹', '2025-05-04'),
-		getGuildRank('길드 랭킹', '2025-05-04'),
-		getDojangRank('무릉도장 랭킹', '2025-05-04'),
+		getTotalRank('종합 랭킹', today),
+		getUnionRank('유니온 랭킹', today),
+		getGuildRank('길드 랭킹', today),
+		getDojangRank('무릉도장 랭킹', today),
 	])
 
 	return (

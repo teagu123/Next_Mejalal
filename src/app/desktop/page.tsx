@@ -2,13 +2,16 @@ import { SearchBox } from '@/components/Search'
 import Image from 'next/image'
 import { getGuildRank, getNotice, getTotalRank, getUpdateNotice } from '../api'
 import { NoticeBox } from '@/components/noticeBox'
+import { useToday } from '@/hook/useToday'
 
 export default async function Home() {
 	const backgroundPath = '/images/searchBackGround/search-background.png'
 
+	const today = useToday()
+
 	const [totalRank, guildRank, noticeList, updateList] = await Promise.all([
-		getTotalRank('종합 랭킹', '2025-05-04', 5, true),
-		getGuildRank('길드 랭킹', '2025-05-04', 5, true),
+		getTotalRank('종합 랭킹', today, 5, true),
+		getGuildRank('길드 랭킹', today, 5, true),
 		getNotice(),
 		getUpdateNotice(),
 	])

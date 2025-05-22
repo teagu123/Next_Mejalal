@@ -1,5 +1,6 @@
 import { GuildList } from '@/components/GuildList'
 import { GuildSearchBox } from '@/components/Search'
+import { useToday } from '@/hook/useToday'
 
 const HEADER_KEY = process.env.NEXT_PUBLIC_API_KEY
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
@@ -26,14 +27,14 @@ const getGuildRank = async (title: string, date: string) => {
 }
 
 export default function Guild() {
+	const today = useToday()
+
 	return (
 		<div className="w-screen flex justify-center">
 			<div className="w-[70vw] mt-20 flex  flex-col mb-1 items-center z-100 ">
 				<h1 className="text-center mb-10 text-5xl text-white">길드 랭킹</h1>
 				<GuildSearchBox />
-				<div className="w-full mt-10 ">
-					{getGuildRank('길드 랭킹', '2025-05-04')}
-				</div>
+				<div className="w-full mt-10 ">{getGuildRank('길드 랭킹', today)}</div>
 			</div>
 		</div>
 	)
