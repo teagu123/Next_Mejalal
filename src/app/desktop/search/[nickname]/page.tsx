@@ -4,8 +4,10 @@ import {
 	getOcid,
 	getPopularity,
 	getStatApi,
+	getUserItem,
 } from '@/app/api'
 import { CashCody } from '@/components/CashCody'
+import { UserItem } from '@/components/CashCody/userItem'
 import { CharacterInfo } from '@/components/CharacterInfo'
 import { CharacterStat } from '@/components/CharacterStat.tsx'
 import { Search404 } from '@/components/Error'
@@ -26,19 +28,26 @@ export default async function SearchUser({ params }: { params: any }) {
 
 	await Delay(1000)
 
-	const [popularity, getStat, cashCody] = await Promise.all([
+	const [popularity, getStat, cashCody, userItem] = await Promise.all([
 		getPopularity(ocid),
 		getStatApi(ocid),
 		getCashCody(ocid),
+		getUserItem(ocid),
 	])
+	console.log(userItem)
 
 	return (
 		<>
 			<div className="w-screen flex flex-col items-center">
 				<div className="w-[70vw] mt-30 flex justify-start">
-					<Suspense fallback={<h3>loading</h3>}>
-						<CashCody cashData={cashCody} />
-					</Suspense>
+					<div>
+						<Suspense fallback={<h3>loading</h3>}>
+							<UserItem userItem={userItem} />
+						</Suspense>
+						<Suspense fallback={<h3>loading</h3>}>
+							<CashCody cashData={cashCody} />
+						</Suspense>
+					</div>
 
 					<div className="flex flex-col items-start">
 						<div className="p-5 bg-[#29292a] rounded-lg mb-1">
