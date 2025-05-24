@@ -17,7 +17,7 @@ export interface CharacterLook {
 	character_gender: '남' | '여'
 	character_class: string
 	character_look_mode: string
-	preset_no: number
+	preset_no: 1 | 2 | 3 | null
 
 	cash_item_equipment_base: CashItem[]
 	cash_item_equipment_preset_1: CashItem[]
