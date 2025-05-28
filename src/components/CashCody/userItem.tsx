@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { CashCodyHover } from '../ItemBoxHover'
+import { CashCodyHover, UserItemHover } from '../ItemBoxHover'
 import {
 	CharacterEquipmentData,
 	ItemEquipment,
@@ -14,6 +14,8 @@ export function UserItem({ userItem }: { userItem: CharacterEquipmentData }) {
 		key: 'item_equipment',
 		selectNum: '기본',
 	})
+
+	console.log(userItem)
 
 	const onChangeCody = (selectNum: string) => {
 		if (selectNum === '기본')
@@ -85,114 +87,114 @@ export function UserItem({ userItem }: { userItem: CharacterEquipmentData }) {
 				{/* 첫 번째 줄 */}
 				{
 					<div className={commonStyle}>
-						{findCashItem('RING', '반지1')}
-						<CashCodyHover item={findItem('반지1')} />
+						{findCashItem('Item', '모자')}
+						<UserItemHover item={findItem('모자')} />
 					</div>
 				}
 				<div className="col-span-1 row-span-1 " />
 				<div className={commonStyle}>
-					{findCashItem('HAT', '모자')}
-					<CashCodyHover item={findItem('모자')} />
+					{findCashItem('Item', '얼굴장식')}
+					<UserItemHover item={findItem('얼굴장식')} />
 				</div>
 				<div className="col-span-1 row-span-1 " />
 
 				{/* 두 번째 줄 */}
 				<div className={commonStyle}>
-					{findCashItem('RING', '반지2')}
-					<CashCodyHover item={findItem('반지2')} />
+					{findCashItem('Item', '눈장식')}
+					<UserItemHover item={findItem('눈장식')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('FACE', '얼굴장식')}
-					<CashCodyHover item={findItem('얼굴장식')} />
+					{findCashItem('Item', '귀고리')}
+					<UserItemHover item={findItem('귀고리')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('FACE', '얼굴장식')}
-					<CashCodyHover item={findItem('얼굴장식')} />
+					{findCashItem('Item', '상의')}
+					<UserItemHover item={findItem('상의')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('FACE', '얼굴장식')}
-					<CashCodyHover item={findItem('얼굴장식')} />
+					{findCashItem('Item', '하의')}
+					<UserItemHover item={findItem('하의')} />
 				</div>
 				<div className="col-span-1 row-span-1 " />
 
 				{/* 세 번째 줄 */}
 				<div className={commonStyle}>
-					{findCashItem('RING', '반지3')}
-					<CashCodyHover item={findItem('반지3')} />
+					{findCashItem('Item', '신발')}
+					<UserItemHover item={findItem('신발')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('FACE', '눈장식')}
-					<CashCodyHover item={findItem('눈장식')} />
+					{findCashItem('Item', '장갑')}
+					<UserItemHover item={findItem('장갑')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('EAR ACC', '귀고리')}
-					<CashCodyHover item={findItem('귀고리')} />
+					{findCashItem('Item', '망토')}
+					<UserItemHover item={findItem('망토')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('EAR ACC', '귀고리')}
-					<CashCodyHover item={findItem('귀고리')} />
+					{findCashItem('Item', '보조무기')}
+					<UserItemHover item={findItem('보조무기')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('EAR ACC', '귀고리')}
-					<CashCodyHover item={findItem('귀고리')} />
+					{findCashItem('Item', '무기')}
+					<UserItemHover item={findItem('무기')} />
 				</div>
 				{/* 네 번째 줄 */}
 				<div className={commonStyle}>
-					{findCashItem('RING', '반지4')}
-					<CashCodyHover item={findItem('반지4')} />
+					{findCashItem('Item', '반지1')}
+					<UserItemHover item={findItem('반지1')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('WEAPON', '무기')}
-					<CashCodyHover item={findItem('무기')} />
+					{findCashItem('Item', '반지2')}
+					<UserItemHover item={findItem('반지2')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('TOP', '상의')}
-					<CashCodyHover item={findItem('상의')} />
+					{findCashItem('Item', '반지3')}
+					<UserItemHover item={findItem('반지3')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('PANTS', '하의')}
-					<CashCodyHover item={findItem('하의')} />
+					{findCashItem('Item', '반지4')}
+					<UserItemHover item={findItem('반지4')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('SUB WEAPON', '보조무기')}
-					<CashCodyHover item={findItem('보조무기')} />
+					{findCashItem('Item', '펜던트')}
+					<UserItemHover item={findItem('펜던트')} />
 				</div>
 
 				{/* 다섯 번째 줄 */}
 				<div className={commonStyle}>
-					{findCashItem('PANTS', '하의')}
-					<CashCodyHover item={findItem('하의')} />
+					{findCashItem('Item', '훈장')}
+					<UserItemHover item={findItem('훈장')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('PANTS', '하의')}
-					<CashCodyHover item={findItem('하의')} />
+					{findCashItem('Item', '벨트')}
+					<UserItemHover item={findItem('벨트')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('PANTS', '하의')}
-					<CashCodyHover item={findItem('하의')} />
+					{findCashItem('Item', '어깨장식')}
+					<UserItemHover item={findItem('어깨장식')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('GLOVES', '장갑')}
-					<CashCodyHover item={findItem('장갑')} />
+					{findCashItem('Item', '포켓 아이템')}
+					<UserItemHover item={findItem('포켓 아이템')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('CAPE', '망토')}
-					<CashCodyHover item={findItem('망토')} />
+					{findCashItem('Item', '기계 심장')}
+					<UserItemHover item={findItem('기계 심장')} />
 				</div>
 
 				{/* 여섯 번째 줄 */}
 				<div className="col-span-2 row-span-1" />
 				<div className={commonStyle}>
-					{findCashItem('SHOES', '신발')}
-					<CashCodyHover item={findItem('신발')} />
+					{findCashItem('Item', '뱃지')}
+					<UserItemHover item={findItem('뱃지')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('SHOES', '신발')}
-					<CashCodyHover item={findItem('신발')} />
+					{findCashItem('Item', '엠블렘')}
+					<UserItemHover item={findItem('엠블렘')} />
 				</div>
 				<div className={commonStyle}>
-					{findCashItem('SHOES', '신발')}
-					<CashCodyHover item={findItem('신발')} />
+					{findCashItem('Item', '펜던트2')}
+					<UserItemHover item={findItem('펜턴트2')} />
 				</div>
 			</div>
 		</div>
